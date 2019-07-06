@@ -1,0 +1,48 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Divinity Stats",
+	"scopeName": "source.divinitystats",
+	"patterns": [
+		{
+			"name": "variable.parameter.divinitynumber",
+			"match": "\\d+"
+		},
+		{
+			"name": "support.variable.divinityusing",
+			"match": "^using\\s*\\\"(.*)\\\"$",
+			"captures": {
+				"1" : { "name" : "variable.parameter.divinitystatname" }
+			}
+		},
+		{
+			"name": "keyword.control.new.divinitystats.entry",
+			"match": "^\\s*?new entry\\s*\\\"(.*)\\\"\\s*?$",
+			"captures": {
+				"1" : { 
+					"name" : "variable.other.divinityentryvalue" 
+				}
+			}
+		},
+		{
+			"name": "keyword.control.divinitystatsdata",
+			"match": "^\\s*?data\\s*\\\"(.*)\\\"\\s*\\\"(.*)\\\"\\s*?$",
+			"captures": {
+				"1" : { 
+						"name" : "support.type.divinitydatatype" 
+				},
+				"2" : { 
+						"name" : "entity.other.attribute-name.divinitydatavalue"
+				}
+			}
+		},
+		{
+			"name": "keyword.other.this.divinitytype",
+			"match": "type \"([a-zA-Z]*)\"",
+			"captures": {
+				"1" : { 
+						"name" : "entity.name.type.type-parameter.divinitytypevalue" 
+				}
+			}
+		}
+	]
+}
