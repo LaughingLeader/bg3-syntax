@@ -1,0 +1,18 @@
+{
+	"compilerOptions": {
+		"importHelpers": true,
+		"lib": [ "es6" ],
+		"module": "commonjs",
+		"target": "es6",
+		"outDir": "bin",
+		"rootDir": "src",
+		"sourceMap": true
+	},
+	"include": [
+		"src"
+	],
+	"exclude": [
+		"node_modules",
+		".vscode-test"
+	]
+}
