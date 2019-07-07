@@ -35,6 +35,12 @@
 					"default": "",
 					"description": "The path to the stat definitions file. Default should be 'Divinity Original Sin 2\\DefEd\\Data\\Editor\\Config\\Stats\\StatObjectDefinitions.sod'.",
 					"scope": "resource"
+				},
+				"divinityStats.enumFile": {
+					"type": "string",
+					"default": "",
+					"description": "The path to the enumerations  file. Default should be 'Divinity Original Sin 2\\DefEd\\Data\\Editor\\Config\\Stats\\Enumerations.xml'.",
+					"scope": "resource"
 				}
 			}
 		},

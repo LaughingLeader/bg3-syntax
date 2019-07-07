@@ -13,17 +13,11 @@ import {
 	CompletionItemKind
 } from "vscode-languageserver";
 
-import runSafeAsync from "./utils/runSafeAsync";
-
-interface DivinityStatsSettings {
-	definitionFile: string;
-}
-
+import DivinityStatsSettings from "./DivinityStatsSettings";
 import Completion from "./Completion";
-import { settings } from 'cluster';
 
-const defaultSettings: DivinityStatsSettings = { definitionFile: "" };
-let globalSettings: DivinityStatsSettings = defaultSettings;
+const defaultSettings: DivinityStatsSettings = new DivinityStatsSettings();
+let globalSettings: DivinityStatsSettings = new DivinityStatsSettings();
 
 export default class Server {
 	connection: Connection;
@@ -76,9 +70,9 @@ export default class Server {
 		return result;
 	}
 
-	async getGlobalSettings() : Promise<DivinityStatsSettings|null>{
+	async getGlobalSettings() : Promise<DivinityStatsSettings>{
 		const { connection, hasConfigurationCapability } = this;
-		let settings = null;
+		let settings:DivinityStatsSettings = defaultSettings;
 		try
 		{
 			if(hasConfigurationCapability) {

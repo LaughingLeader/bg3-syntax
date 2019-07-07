@@ -6,7 +6,8 @@
 		"target": "es6",
 		"outDir": "bin",
 		"rootDir": "src",
-		"sourceMap": true
+		"sourceMap": true,
+		"esModuleInterop" : true
 	},
 	"include": [
 		"src"
