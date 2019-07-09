@@ -15,11 +15,17 @@
 			}
 		},
 		{
-			"name": "keyword.control.new.divinitystats.entry",
-			"match": "^\\s*?new entry\\s*\\\"(.*)\\\"\\s*?$",
+			"name": "divinityStats.newentryline",
+			"match": "^(.*?new entry\\s*\\\")(.*)(\\\".*?$)",
 			"captures": {
-				"1" : { 
-					"name" : "variable.other.divinityentryvalue" 
+				"1": {
+					"name": "keyword.control.new.divinitystatsentry"
+				},
+				"2" : { 
+					"name" : "entity.name.filename.divinitystatsentryname" 
+				},
+				"3": {
+					"name": "keyword.control.new.divinitystatsentry"
 				}
 			}
 		},

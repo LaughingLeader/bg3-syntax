@@ -11,6 +11,7 @@ export default class ObjectDefinitionEntry extends BaseCompletionEntry {
 	fields:Map<string, FieldDefinitionEntry>
 	category:string
 	export_type:string
+	can_inherit:boolean
 
 	constructor(xmlData:object) {
 		super(xmlData);
@@ -30,8 +31,15 @@ export default class ObjectDefinitionEntry extends BaseCompletionEntry {
 		if(fieldsContainer !== undefined) { 
 			fieldsContainer.forEach(field => {
 				let fieldEntry:FieldDefinitionEntry = new FieldDefinitionEntry(field);
-				this.fields.set(fieldEntry.name, fieldEntry);
-				console.log(`Added field entry: ${fieldEntry.name} | ${JSON.stringify(fieldEntry, null, 2)}`);
+
+				//Using is a special declaration instead of 'data "Property"
+				if(fieldEntry.name !== "Using") {
+					this.fields.set(fieldEntry.name, fieldEntry);
+					//console.log(`Added field entry: ${fieldEntry.name} | ${JSON.stringify(fieldEntry, null, 2)}`);
+				}
+				else {
+					this.can_inherit = true
+				}
 			});
 		}
 
@@ -44,8 +52,9 @@ export class FieldDefinitionEntry extends BaseCompletionEntry {
 	display_name:string
 	type:string
 	enumeration_type_name:string
+	parser_name:string
 
-	values:EnumValues
+	//values:EnumValues
 
 	constructor(xmlData:object) {
 		super(xmlData);
@@ -56,6 +65,14 @@ export class FieldDefinitionEntry extends BaseCompletionEntry {
 		this.export_name = this.safeAssign("export_name", this.attributes, this.name);
 		this.type = this.safeAssign("type", this.attributes, "String");
 		this.enumeration_type_name = this.safeAssign("enumeration_type_name", this.attributes, "");
+		this.parser_name = this.safeAssign("parser_name", this.attributes, "");
+		if(this.parser_name == "Conditions") {
+			this.enumeration_type_name = "SkillTargetCondition";
+		}
+
+		// if(this.export_name == "ExtraProperties" || this.export_name == "SkillProperties") {
+		// 	this.enumeration_type_name = "Game Action";
+		// }
 
 		this.createCompletion(this.export_name, CompletionItemKind.Keyword);
 	}

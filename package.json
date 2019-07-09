@@ -41,6 +41,12 @@
 					"default": "",
 					"description": "The path to the enumerations  file. Default should be 'Divinity Original Sin 2\\DefEd\\Data\\Editor\\Config\\Stats\\Enumerations.xml'.",
 					"scope": "resource"
+				},
+				"divinityStats.limitToAvailableProperties": {
+					"type": "boolean",
+					"default": true,
+					"description": "Show only available (not declared) properties for stats auto-completion. Setting this to false will show all valid properties.",
+					"scope": "resource"
 				}
 			}
 		},

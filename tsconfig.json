@@ -1,9 +1,9 @@
 {
 	"compilerOptions": {
 		"importHelpers": true,
-		"lib": [ "es6" ],
+		"lib": [ "esnext" ],
 		"module": "commonjs",
-		"target": "es6",
+		"target": "esnext",
 		"outDir": "bin",
 		"rootDir": "src",
 		"sourceMap": true,

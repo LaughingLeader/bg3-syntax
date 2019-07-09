@@ -26,15 +26,15 @@ export default class BaseCompletionEntry{
 		if(container !== undefined && getProp in container) { 
 			return container[getProp];
 		} else {
-			console.log(`Property ${getProp} could not be found in ${container}`);
+			//console.log(`Property ${getProp} could not be found in ${container}`);
 			return fallback;
 		}
 	}
 
-	createCompletion(value:any, kind:CompletionItemKind = CompletionItemKind.Keyword){
+	createCompletion(setValue:any, setKind:CompletionItemKind = CompletionItemKind.Keyword){
 		this.completion = CompletionItem.create(this.name);
-		this.completion.data = value;
-		this.completion.kind = kind;
+		this.completion.data = setValue;
+		this.completion.kind = setKind;
 		this.completion.detail = this.description;
 
 		if(this.documentation === undefined) {
