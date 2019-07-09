@@ -103,6 +103,7 @@
 	"dependencies": {
 		"fs": "0.0.1-security",
 		"path": "^0.12.7",
+		"voca": "^1.4.0",
 		"vscode-languageclient": "^5.2.1",
 		"vscode-languageserver": "^5.2.1",
 		"xml2js": "^0.4.19"

@@ -5,14 +5,21 @@ import {
 } 
 from "vscode-languageserver";
 
-export default class BaseCompletionEntry{
+export interface ICompletionEntry {
+	completion:CompletionItem;
+	name:string
+	description:string
+	documentation:string|MarkupContent;	
+}
+
+export default class BaseCompletionEntry implements ICompletionEntry{
 	completion:CompletionItem
 	data:object
 	attributes:object
 
 	name:string
 	description:string
-	documentation:string | MarkupContent;
+	documentation:string|MarkupContent;
 
 	constructor(xmlData:object) {
 		this.data = xmlData;

@@ -19,8 +19,10 @@ const fs = require('fs'), xml2js = require('xml2js');
 const path = require('path');
 
 import ObjectDefinitionEntry from './stats/ObjectDefinitionEntry';
-import EnumValues from './stats/EnumEntry';
+import { IEnumValues, EnumValues } from './stats/EnumValues';
+import CustomEnumValues from './stats/CustomEnumValues';
 import DataCompletion from './completion/DataCompletion';
+import { TextEdit } from "vscode";
 
 export default class Completion {
 	server:Server;
@@ -31,7 +33,7 @@ export default class Completion {
 	definitions: Map<string, Map<string, ObjectDefinitionEntry>>;
 
 	enumSource: object;
-	enumerations: Map<string, EnumValues>;
+	enumerations: Map<string, IEnumValues>;
 
 	dataCompletion: DataCompletion;
 
@@ -115,6 +117,31 @@ export default class Completion {
 					});
 					this.enumSource = d;
 					this.server.connection.console.log(`[DivinityStats] Finished building Enumerations. (${this.enumerations.size})`);
+
+					let targetConditionOperators:CustomEnumValues = new CustomEnumValues();
+					let notop = CompletionItem.create("!");
+					notop.sortText = "-1";
+					notop.documentation = {
+						kind: "markdown",
+						value: "NOT operator."
+					};
+					targetConditionOperators.completionValues.push(notop);
+					let andop = CompletionItem.create("&");
+					andop.sortText = "-2";
+					andop.documentation = {
+						kind: "markdown",
+						value: "AND operator."
+					};
+					targetConditionOperators.completionValues.push(andop);
+					let orop = CompletionItem.create("|");
+					orop.sortText = "-3";
+					orop.documentation = {
+						kind: "markdown",
+						value: "OR operator."
+					};
+					targetConditionOperators.completionValues.push(orop);
+
+					this.enumerations.set("TargetConditionOperator", targetConditionOperators);
 				});
 			}
 		});

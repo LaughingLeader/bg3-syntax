@@ -4,7 +4,6 @@ import {
 } 
 from "vscode-languageserver";
 
-import EnumValues from './EnumEntry';
 import BaseCompletionEntry from "./BaseCompletionEntry";
 
 export default class ObjectDefinitionEntry extends BaseCompletionEntry {

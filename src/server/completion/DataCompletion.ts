@@ -16,12 +16,13 @@ import {
 } 
 from "vscode-languageserver";
 
+import * as v from "voca";
+
 const path = require('path');
 
 import Completion from "../Completion";
 import * as patterns from "./Patterns";
 import ObjectDefinitionEntry, { FieldDefinitionEntry } from '../stats/ObjectDefinitionEntry';
-import EnumValues from '../stats/EnumEntry';
 import DivinityStatsSettings from '../DivinityStatsSettings';
 
 export default class DataCompletion {
@@ -254,18 +255,32 @@ export default class DataCompletion {
 								}
 
 								if(field.export_name == "ExtraProperties" || field.export_name == "SkillProperties") {
-									if(params.position.character - text.indexOf("IF") >= 2) {
-										let targetConditions = this.parent.enumerations.get("SkillTargetCondition").completionValues;
-										result = result.concat(targetConditions).filter((c, index, arr) => {
-											return c.data != "None";
-										});
-									} else {
-										let actions = this.parent.enumerations.get("Game Action").completionValues;
-										let surfaceActions = this.parent.enumerations.get("Surface Change").completionValues;
-										result = result.concat(actions, surfaceActions).filter((c, index, arr) => {
-											return c.data != "None";
-										});
-									}	
+									let precedingText = text.substr(params.position.character - 7);
+									if(precedingText.includes("TARGET") || precedingText.includes("SELF")) {
+										let ifCompletion = CompletionItem.create("IF");
+										ifCompletion.data = "IF";
+										ifCompletion.kind = CompletionItemKind.Text;
+										ifCompletion.insertText = "(";
+										result.push(ifCompletion);
+									}
+									else {
+										precedingText = text.substr(params.position.character - 3);
+										if(precedingText == "IF(") {
+											result = result.concat(this.parent.enumerations.get("TargetConditionOperator").completionValues);
+
+											let targetConditions = this.parent.enumerations.get("SkillTargetCondition").completionValues;
+											result = result.concat(targetConditions).filter((c, index, arr) => {
+												return c.data != "None";
+											});
+										}
+										else {
+											let actions = this.parent.enumerations.get("Game Action").completionValues;
+											let surfaceActions = this.parent.enumerations.get("Surface Change").completionValues;
+											result = result.concat(actions, surfaceActions).filter((c, index, arr) => {
+												return c.data != "None";
+											});
+										}
+									}
 								}
 							}
 						}
