@@ -20,7 +20,7 @@
 		"vscode": "^1.31.0"
 	},
 	"activationEvents": [
-		"onLanguage:divinitystats",
+		"onLanguage:divinity-stats",
 		"workspaceContains:**/Stats/Generated",
 		"workspaceContains:**/Stats/Generated/Data"
 	],
@@ -52,10 +52,10 @@
 		},
 		"languages": [
 			{
-				"id": "divinitystats",
+				"id": "divinity-stats",
 				"aliases": [
 					"Divinity Stats",
-					"divinitystats"
+					"divinity-stats"
 				],
 				"extensions": [
 					".txt"
@@ -69,7 +69,7 @@
 		],
 		"grammars": [
 			{
-				"language": "divinitystats",
+				"language": "divinity-stats",
 				"scopeName": "source.divinitystats",
 				"path": "./syntaxes/divinity-stats.tmLanguage.json"
 			}
