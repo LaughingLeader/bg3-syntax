@@ -5,7 +5,7 @@
 	"author": "LaughingLeader",
 	"license": "MIT",
 	"version": "1.0.0",
-	"icon": "images/vscode-divinitystats-icon",
+	"icon": "images/vscode-divinitystats-icon.png",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/LaughingLeader-DOS2-Mods/divinity-stats-languageserver"
