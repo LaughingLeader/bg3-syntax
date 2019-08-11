@@ -1,6 +1,7 @@
 import { EventEmitter } from "events";
 import { join } from "path";
 
+
 import { ExtensionContext, OutputChannel, window, workspace } from "vscode";
 import {
 	LanguageClient,
@@ -11,7 +12,7 @@ import {
 	
 export default class Client extends EventEmitter {
 	clientId = "divinity-stats-language-server";
-	clientName = "Divinity Stats Language Server";
+	clientName = "Divinity Stats Language";
 	connection: LanguageClient | null;
 	connectCallbacks: Array<Function> = [];
 	context: ExtensionContext;
@@ -25,6 +26,9 @@ export default class Client extends EventEmitter {
 		this.context = context;
 		this.outputChannel = window.createOutputChannel(this.clientName);
 		this.connection = this.createConnection();
+
+		console.log("Client log test");
+		//let filter:DocumentFilter = { scheme: 'file', language: 'divinity-stats' };
 	}
 
 	private createConnection() {
@@ -50,10 +54,11 @@ export default class Client extends EventEmitter {
 			language
 		})),
 		{
-			scheme: "divinity"
+			scheme: "divinity-stats"
 		}
 		],
-		outputChannel
+		outputChannel,
+		outputChannelName: "Divinity Stats Language"
 	};
 
 	const client = new LanguageClient(
@@ -79,7 +84,6 @@ export default class Client extends EventEmitter {
 
 	dispose(): Thenable<void> {
 		const { connection } = this;
-
 		this.connection = null;
 		return;
 	}
