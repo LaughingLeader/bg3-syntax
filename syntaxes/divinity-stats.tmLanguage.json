@@ -1,54 +1,171 @@
 {
 	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
 	"name": "Divinity Stats",
-	"scopeName": "source.divinitystats",
+	"scopeName": "text.divinity.stats",
 	"patterns": [
 		{
-			"name": "variable.parameter.divinitynumber",
-			"match": "\\d+"
-		},
-		{
-			"name": "support.variable.divinityusing",
-			"match": "^using\\s*\\\"(.*)\\\"$",
-			"captures": {
-				"1" : { "name" : "variable.parameter.divinitystatname" }
-			}
-		},
-		{
-			"name": "divinityStats.newentryline",
-			"match": "^(.*?new entry\\s*\\\")(.*)(\\\".*?$)",
-			"captures": {
-				"1": {
-					"name": "keyword.control.new.divinitystatsentry"
-				},
-				"2" : { 
-					"name" : "entity.name.filename.divinitystatsentryname" 
-				},
-				"3": {
-					"name": "keyword.control.new.divinitystatsentry"
-				}
-			}
-		},
-		{
-			"name": "keyword.control.divinitystatsdata",
-			"match": "^\\s*?data\\s*\\\"(.*)\\\"\\s*\\\"(.*)\\\"\\s*?$",
-			"captures": {
-				"1" : { 
-						"name" : "support.type.divinitydatatype" 
-				},
-				"2" : { 
-						"name" : "entity.other.attribute-name.divinitydatavalue"
-				}
-			}
-		},
-		{
-			"name": "keyword.other.this.divinitytype",
-			"match": "type \"([a-zA-Z]*)\"",
-			"captures": {
-				"1" : { 
-						"name" : "entity.name.type.type-parameter.divinitytypevalue" 
-				}
-			}
+			"include": "#main"
 		}
-	]
+	],
+	"repository": {
+		"main":{
+			"patterns":[
+				{
+					"name": "variable.parameter.divinitynumber",
+					"match": "\\d+"
+				},
+				{
+					"name": "support.variable.divinityusing",
+					"match": "^using\\s*\\\"(.*)\\\"$",
+					"captures": {
+						"1" : { "name" : "variable.parameter.divinitystatname" }
+					}
+				},
+				{
+					"name": "divinitystats.newentryline",
+					"match": "^(.*?new)\\s((?!itemcolor|ItemCombinationResult).*)\\s\\\"(\\w+)\\\".*?$",
+					"captures": {
+						"1": {
+							"name": "keyword.control.new.divinitystatsentry"
+						},
+						"2": {
+							"name": "entity.name.type.type-parameter.divinitystatsclassname"
+						},
+						"3" : { 
+							"name" : "entity.name.filename.divinitystatsentryname" 
+						}
+					}
+				},
+				{
+					"name": "keyword.control.divinitystatsdata",
+					"match": "^\\s*?(data|param)\\s*\\\"(.*)\\\"\\s*\\\"(.*)\\\"\\s*?$",
+					"captures": {
+						"2" : { 
+								"name" : "support.type.divinitydatatype" 
+						},
+						"3" : { 
+								"name" : "entity.other.attribute-name.divinitydatavalue"
+						}
+					}
+				},
+				{
+					"name": "keyword.other.this.divinitytype",
+					"match": "type \"([a-zA-Z]*)\"",
+					"captures": {
+						"1" : { 
+								"name" : "entity.name.type.type-parameter.divinitytypevalue" 
+						}
+					}
+				},
+				{
+					"name": "keyword.other.this.divinityrarity",
+					"match": "(All|Common|Uncommon|Rare|Epic|Divine|Legendary)",
+					"captures": {
+						"1" : { 
+								"name" : "variable.parameter.divinityrarity" 
+						}
+					}
+				},
+				{
+					"name": "keyword.control.divinityitemprogressionvisuals",
+					"match": "^add\\s(levelgroup|rootgroup|namegroup|)\\s*?[0=9,]*?\"([a-zA-Z0-9_\\-]*)[\\s,\"]*(\\w*)?[\\s,\"]*?(\\w+)?[\\s,\"]*?$",
+					"captures": {
+						"1" : { 
+								"name" : "support.type.divinityprogressionproperty" 
+						},
+						"2" : { 
+								"name" : "entity.other.attribute-name.divinityprogressionpropertyvalue"
+						},
+						"3" : { 
+								"name" : "entity.other.attribute-name.divinityprogressionpropertyvalue"
+						},
+						"4" : { 
+								"name" : "entity.other.attribute-name.divinityprogressionpropertyvalue"
+						},
+						"5" : { 
+								"name" : "entity.other.attribute-name.divinityprogressionpropertyvalue"
+						}
+					}
+				},
+				{
+					"name": "keyword.control.divinityitemprogressionnames",
+					"match": "^add\\s(name|namecool)\\s\"(.*)\",\"(.*)\"$",
+					"captures": {
+						"1" : { 
+								"name" : "support.type.divinityprogressionproperty" 
+						},
+						"2" : { 
+								"name" : "entity.other.attribute-name.divinityprogressionname"
+						},
+						"3" : { 
+								"name" : "entity.other.attribute-name.divinityprogressiondescription"
+						}
+					}
+				},
+				{
+					"name": "divinitystats.newcomboproperty",
+					"match": "^(.*?new)\\s(ItemComboPropertyEntry).*$",
+					"captures": {
+						"1": {
+							"name": "keyword.control.new.divinitystatsentry"
+						},
+						"2": {
+							"name": "keyword.other.this.divinitystatscomboproperty"
+						}
+					}
+				},
+				{
+					"name": "divinitystats.newcomboresult",
+					"match": "^(.*?new)\\s(ItemCombinationResult)\\s\\\"(\\w+)\\\".*?$",
+					"captures": {
+						"1": {
+							"name": "keyword.control.new.divinitystatsentry"
+						},
+						"2": {
+							"name": "keyword.other.this.divinitystatscomboresult"
+						},
+						"3" : { 
+							"name" : "entity.name.filename.divinitystatsentryname" 
+						}
+					}
+				},
+				{
+					"name": "divinitystats.itemcolor",
+					"match": "^(new)\\s(itemcolor)\\s\"(.*?)\",\"(.*?)\",\"(.*?)\",\"(.*?)\"$",
+					"captures": {
+						"1": {
+							"name": "keyword.control.new.divinitystatsentry"
+						},
+						"2" : { 
+							"name" : "entity.name.type.type-parameter.divinitystatsclassname" 
+						},
+						"3" : { 
+							"name" : "entity.name.filename.divinitystatsentryname" 
+						},
+						"4": {
+							"name": "entity.other.attribute-name.divinitystatscolor"
+						},
+						"5": {
+							"name": "entity.other.attribute-name.divinitystatscolor"
+						},
+						"6": {
+							"name": "entity.other.attribute-name.divinitystatscolor"
+						}
+					}
+				},
+				{
+					"name": "keyword.control.divinitystatsequipment",
+					"match": "^(add)\\s(equipmentgroup|equipment entry)\\s?\"?(\\w+)?\"?$",
+					"captures": {
+						"2" : { 
+								"name" : "support.type.divinitydatatype" 
+						},
+						"3" : { 
+								"name" : "entity.other.attribute-name.divinitydatavalue"
+						}
+					}
+				}
+			]
+		}
+	}
 }
