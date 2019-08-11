@@ -5,9 +5,10 @@
 	"author": "LaughingLeader",
 	"license": "MIT",
 	"version": "1.0.0",
+	"icon": "images/vscode-divinitystats-icon",
 	"repository": {
 		"type": "git",
-		"url": ""
+		"url": "https://github.com/LaughingLeader-DOS2-Mods/divinity-stats-languageserver"
 	},
 	"publisher": "Languages",
 	"categories": [],
@@ -70,7 +71,7 @@
 		"grammars": [
 			{
 				"language": "divinity-stats",
-				"scopeName": "source.divinitystats",
+				"scopeName": "text.divinity.stats",
 				"path": "./syntaxes/divinity-stats.tmLanguage.json"
 			}
 		]
