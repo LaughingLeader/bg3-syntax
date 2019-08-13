@@ -229,7 +229,7 @@
 				},
 				{
 					"name": "keyword.control.divinitystats-treasuretable-objectcategory",
-					"match": "^(object category|CategoryMap|WeaponCounter|SkillbookCounter|ArmorCounter)\\s\"(\\w+)\"(,\")?(\\w+)?\"?",
+					"match": "^(object category|CategoryMap|WeaponCounter|SkillbookCounter|ArmorCounter)\\s\"?(\\w+)\"(,\")?(\\w+)?\"?",
 					"captures": {
 						"1": {
 							"name": "support.type.divinitystatstreasureparamtype"
@@ -244,7 +244,7 @@
 				},
 				{
 					"name": "entity.other.attribute-name.divinitystats-treasuretable-properties",
-					"match": "(StartLevel|EndLevel|IgnoreLevelDiff|MinLevel|MaxLevel|treasure itemtypes)",
+					"match": "(StartLevel|EndLevel|IgnoreLevelDiff|MinLevel|MaxLevel|treasure itemtypes|CanMerge)",
 					"captures": {
 						"1": {
 							"name": "entity.other.attribute-name.divinitystatstreasuretablepropertyvalue"
