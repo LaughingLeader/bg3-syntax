@@ -266,6 +266,10 @@
 							"name": "entity.other.attribute-name.paramvalue"
 						}
 					}
+				},
+				{
+				  "name": "comment.line.double-slash.divinitystats",
+				  "match": "//.*"
 				}
 			]
 		}

@@ -58,9 +58,6 @@
 					"Divinity Stats",
 					"divinity-stats"
 				],
-				"extensions": [
-					".txt"
-				],
 				"filenamePatterns": [
 					"**/Stats/Generated/*.txt",
 					"**/Stats/Generated/Data/*.txt"
