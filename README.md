@@ -4,4 +4,4 @@
 
 This is a vscode extension for adding language server support for Divinity stats files (.txt).
 
-Currently features syntax highlighting and auto-completion support.
+Currently features syntax highlighting.
