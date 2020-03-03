@@ -200,7 +200,19 @@
 		"skillset":{
 			"patterns": [
 				{
-					"name": "keyword.control.divinitystats-skillset",
+					"name": "divinitystats.skillset",
+					"match": "^(.*?new)\\s(skillset).*$",
+					"captures": {
+						"1": {
+							"name": "keyword.control.new.divinitystatsentry"
+						},
+						"2": {
+							"name": "keyword.other.this.divinitystatsskillsetentry"
+						}
+					}
+				},
+				{
+					"name": "divinitystats.skillset.entry",
 					"match": "^(add)\\s(skill)\\s?\"?(\\w+)?\"?$",
 					"captures": {
 						"2" : { 
