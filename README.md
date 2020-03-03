@@ -1,7 +1,7 @@
 # Divinity Stats VSCode Extension
 
-## Not yet ready for regular use.
+## Warning: Work-in-Progress
 
-This is a vscode extension for adding language server support for Divinity stats files (.txt).
+This is a vscode extension for adding language server support for Divinity: Original Sin 2 - Definitive Edition stats files (.txt).
 
-Currently features syntax highlighting and auto-completion support.
+Currently features syntax highlighting.
