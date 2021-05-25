@@ -6,9 +6,9 @@ import { ExtensionContext, OutputChannel, window, workspace } from "vscode";
 import {
 	LanguageClient,
 	LanguageClientOptions,
-	TransportKind,
-	ServerOptions
-} from "vscode-languageclient";
+	ServerOptions,
+	TransportKind
+} from 'vscode-languageclient/node';
 	
 export default class Client extends EventEmitter {
 	clientId = "divinity-stats-language-server";

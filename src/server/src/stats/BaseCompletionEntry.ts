@@ -3,7 +3,7 @@ import {
 	CompletionItemKind,
 	MarkupContent
 } 
-from "vscode-languageserver";
+from "vscode-languageserver/node";
 
 export interface ICompletionEntry {
 	completion:CompletionItem;

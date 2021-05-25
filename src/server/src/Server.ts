@@ -9,9 +9,14 @@ import {
 	ServerCapabilities,
 	TextDocuments,
 	TextDocumentPositionParams,
+	TextDocumentSyncKind,
 	CompletionItem,
 	CompletionItemKind
-} from "vscode-languageserver";
+} from "vscode-languageserver/node";
+
+import {
+	TextDocument
+} from 'vscode-languageserver-textdocument';
 
 import DivinityStatsSettings from "./DivinityStatsSettings";
 import Completion from "./Completion";
@@ -21,14 +26,14 @@ let globalSettings: DivinityStatsSettings = new DivinityStatsSettings();
 
 export default class Server {
 	connection: Connection;
-	documents: TextDocuments;
+	documents: TextDocuments<TextDocument>;
 	documentSettings: Map<string, Thenable<DivinityStatsSettings>> = new Map();
 
 	hasConfigurationCapability: boolean = false;
 	hasWorkspaceFolderCapability: boolean = false;
 	hasDiagnosticRelatedInformationCapability: boolean = false;
 
-	completion: Completion;
+	completion: Completion = new Completion(this);
 
 	constructor() {
 		// Create a connection for the server. The connection uses Node's IPC as a transport.
@@ -45,7 +50,7 @@ export default class Server {
 
 		this.connection = connection;
 
-		const documents = new TextDocuments();
+		const documents: TextDocuments<TextDocument> = new TextDocuments(TextDocument);
 		this.documents = documents;
 
 		documents.listen(connection);
@@ -130,7 +135,7 @@ export default class Server {
 
 		return {
 			capabilities: {
-				textDocumentSync: this.documents.syncKind,
+				textDocumentSync: TextDocumentSyncKind.Incremental,
 				completionProvider: {
 					resolveProvider: true,
 					triggerCharacters: ['"']

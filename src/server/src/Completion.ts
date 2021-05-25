@@ -4,12 +4,16 @@ import {
 	CompletionItem,
 	CompletionItemKind,
 	Connection,
-	TextDocument,
 	TextDocuments,
 	Range,
 	CancellationToken
 } 
-from "vscode-languageserver";
+from "vscode-languageserver/node";
+
+import {
+	TextDocument,
+	TextEdit
+} from 'vscode-languageserver-textdocument';
 
 import Server from "./Server";
 import DivinityStatsSettings from "./DivinityStatsSettings";
@@ -22,12 +26,11 @@ import ObjectDefinitionEntry from './stats/ObjectDefinitionEntry';
 import { IEnumValues, EnumValues } from './stats/EnumValues';
 import CustomEnumValues from './stats/CustomEnumValues';
 import DataCompletion from './completion/DataCompletion';
-import { TextEdit } from "vscode";
 
 export default class Completion {
 	server:Server;
 	connection: Connection;
-	documents: TextDocuments;
+	documents: TextDocuments<TextDocument>;
 
 	definitionsSource: object;
 	definitions: Map<string, Map<string, ObjectDefinitionEntry>>;

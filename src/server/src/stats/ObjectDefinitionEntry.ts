@@ -2,7 +2,7 @@ import {
 	CompletionItem,
 	CompletionItemKind
 } 
-from "vscode-languageserver";
+from "vscode-languageserver/node";
 
 import BaseCompletionEntry from "./BaseCompletionEntry";
 

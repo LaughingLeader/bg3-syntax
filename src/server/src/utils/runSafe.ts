@@ -6,8 +6,8 @@
 import {
 	CancellationToken,
 	ResponseError,
-	ErrorCodes
-} from "vscode-languageserver";
+	LSPErrorCodes
+} from "vscode-languageserver/node";
 
 export function formatError(message: string, err: any): string {
 	if (err instanceof Error) {
@@ -22,7 +22,7 @@ export function formatError(message: string, err: any): string {
 }
 
 export function cancelValue<E>() {
-	return new ResponseError<E>(ErrorCodes.RequestCancelled, "Request cancelled");
+	return new ResponseError<E>(LSPErrorCodes.RequestCancelled, "Request cancelled");
 }
 
 export default function runSafe<T, E>(
