@@ -1,12 +1,13 @@
-import * as vscode from 'vscode'
+import * as vscode from 'vscode';
 
 export default {
 	provideFoldingRanges(document, context, token) {
-		let itemComboPattern = /"^(new ItemCombination)\\s.*$"/;
-		let itemComboEndPattern = /"^(new ItemCombinationResult.*)[\\s\\S]*?(?=\\n{2,})"/;
+		const itemComboPattern = /"^(new ItemCombination)\\s.*$"/;
+		const itemComboEndPattern = /"^(new ItemCombinationResult.*)[\\s\\S]*?(?=\\n{2,})"/;
 
-		let sectionStart = 0, FR = [];  // regex to detect start of region
-		let sectionEnd = 0
+		let sectionStart = 0;
+		const FR = [];  // regex to detect start of region
+		let sectionEnd = 0;
 
 		console.log('folding range invoked');
 
@@ -29,4 +30,4 @@ export default {
 
 		return FR;
 	}
-  } as vscode.FoldingRangeProvider
+  } as vscode.FoldingRangeProvider;

@@ -1,13 +1,15 @@
 {
 	"compilerOptions": {
+		"forceConsistentCasingInFileNames": true,
 		"importHelpers": true,
-		"lib": [ "esnext" ],
+		"lib": ["ES2019"],
 		"module": "commonjs",
-		"target": "esnext",
+		"moduleResolution": "node",
 		"outDir": "bin",
 		"rootDir": "src",
 		"sourceMap": true,
-		"esModuleInterop" : true
+		"strict": true,
+		"target": "es2019"
 	},
 	"include": [
 		"src"
@@ -15,5 +17,9 @@
 	"exclude": [
 		"node_modules",
 		".vscode-test"
+	],
+	"references": [
+		{ "path": "./src/client" },
+		{ "path": "./src/server" }
 	]
 }

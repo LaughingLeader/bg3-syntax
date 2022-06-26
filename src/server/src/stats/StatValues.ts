@@ -1,21 +1,17 @@
-
-
-
-
-let Requirement:Array<string> = new Array(
+const Requirement:Array<string> = [
 	"MeleeWeapon",
 	"RangedWeapon",
 	"StaffWeapon",
 	"DaggerWeapon",
 	"ShieldWeapon",
 	"ArrowWeapon"
-);
+];
 
-let Requirements:Array<string> = new Array(
+const Requirements:Array<string> = [
 	"Combat",
 	"Immobile",
 	"Tag",
 	"MinKarma",
 	"MaxKarma",
 	"ArrowWeapon"
-);
+];

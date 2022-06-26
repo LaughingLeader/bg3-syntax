@@ -1,11 +1,16 @@
 {
 	"compilerOptions": {
-		"module": "commonjs",
-		"target": "es2019",
+		"composite": true,
+		"forceConsistentCasingInFileNames": true,
+		"importHelpers": true,
 		"lib": ["ES2019"],
+		"module": "commonjs",
+		"moduleResolution": "node",
 		"outDir": "out",
 		"rootDir": "src",
-		"sourceMap": true
+		"sourceMap": true,
+		"strict": false,
+		"target": "es2019"
 	},
 	"include": ["src"],
 	"exclude": ["node_modules", ".vscode-test"]

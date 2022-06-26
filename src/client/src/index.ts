@@ -12,7 +12,7 @@ export function activate(context: ExtensionContext) {
 		instance = new Client(context);
 		//context.subscriptions.push(vscode.languages.registerFoldingRangeProvider('divinity-stats', foldingProvider));
 
-		console.log("Registered folding provider?");
+		console.log("Registered folding provider");
 	}
 }
 
@@ -21,7 +21,7 @@ export function deactivate(): Thenable<void> {
 		return Promise.resolve();
 	}
 
-	let result = instance.dispose();
+	const result = instance.dispose();
 	instance = null;
 	return result;
 }

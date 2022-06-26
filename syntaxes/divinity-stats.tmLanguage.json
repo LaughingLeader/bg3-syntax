@@ -41,7 +41,7 @@
 				},
 				{
 					"name": "divinitystats.newentryline",
-					"match": "^(.*?new)\\s((?!itemcolor|ItemCombinationResult).*)\\s\\\"(\\w+)\\\".*?$",
+					"match": "^(.*?new)\\s((?!itemcolor|ItemCombinationResult).*)\\s\\\"([^\"]+)\\\".*?$",
 					"captures": {
 						"1": {
 							"name": "keyword.control.new.divinitystatsentry"
@@ -56,7 +56,7 @@
 				},
 				{
 					"name": "keyword.control.divinitystatsdata",
-					"match": "^\\s*?(data|param)\\s*\\\"(.*)\\\"\\s*\\\"(.*)\\\"\\s*?$",
+					"match": "^\\s*?(data|param)\\s*\\\"(.*)\\\"\\s*\\\"(.*)\\\"",
 					"captures": {
 						"2" : { 
 							"name" : "support.type.divinitydatatype" 
@@ -105,7 +105,7 @@
 				"patterns": [
 					{
 						"name": "keyword.control.divinitystatsequipment",
-						"match": "^(add)\\s(equipmentgroup|equipment entry)\\s?\"?(\\w+)?\"?$",
+						"match": "^(add)\\s(equipmentgroup|equipment entry)\\s?\"?([^\"]+)?\"?$",
 						"captures": {
 							"2" : { 
 								"name" : "support.type.divinitydatatype" 
@@ -130,7 +130,7 @@
 					},
 					{
 						"name": "keyword.control.divinityitemprogressionvisuals",
-						"match": "^add\\s(levelgroup|rootgroup|namegroup|)\\s*?[0-9,]*?\"([a-zA-Z0-9_\\-]*)[\\s,\"]*(\\w*)?[\\s,\"]*?(\\w+)?[\\s,\"]*?$",
+						"match": "^add\\s(levelgroup|rootgroup|namegroup|)\\s*?[0-9,]*?\"([a-zA-Z0-9_\\-]*)[\\s,\"]*([^\"]*)?[\\s,\"]*?([^\"]+)?[\\s,\"]*?$",
 							"captures": {
 								"1" : { 
 									"name" : "support.type.divinityprogressionproperty" 
@@ -182,7 +182,7 @@
 						},
 						{
 							"name": "divinitystats.itemcombo.result",
-							"match": "^(.*?new)\\s(ItemCombinationResult)\\s\\\"(\\w+)\\\".*?$",
+							"match": "^(.*?new)\\s(ItemCombinationResult)\\s\\\"([^\"]+)\\\".*?$",
 							"captures": {
 								"1": {
 									"name": "keyword.control.new.divinitystatsentry"
@@ -213,7 +213,7 @@
 						},
 						{
 							"name": "divinitystats.skillset.entry",
-							"match": "^(add)\\s(skill)\\s?\"?(\\w+)?\"?$",
+							"match": "^(add)\\s(skill)\\s?\"?([^\"]+)?\"?$",
 							"captures": {
 								"1" : { 
 									"name" : "support.type.divinitystats.add" 
@@ -244,7 +244,7 @@
 						},
 						{
 							"name": "keyword.control.divinitystats-treasuretable-objectcategory",
-							"match": "^(object category|CategoryMap|WeaponCounter|SkillbookCounter|ArmorCounter)\\s\"?(\\w+)\"(,\")?(\\w+)?\"?",
+							"match": "^(object category|CategoryMap|WeaponCounter|SkillbookCounter|ArmorCounter)\\s\"?([^\"]+)\"(,\")?([^\"]+)?\"?",
 							"captures": {
 								"1": {
 									"name": "support.type.divinitystatstreasureparamtype"

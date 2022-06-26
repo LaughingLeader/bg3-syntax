@@ -12,9 +12,13 @@
 		"url": "https://github.com/Microsoft/vscode-extension-samples"
 	},
 	"dependencies": {
+		"voca": "^1.4.0",
 		"vscode-languageserver": "^7.0.0",
-		"vscode-languageserver-textdocument": "^1.0.1",
-		"voca" : "^1.4.0"
+		"vscode-languageserver-textdocument": "^1.0.2",
+		"xml2js": "^0.4.23"
 	},
-	"scripts": {}
+	"scripts": {},
+	"devDependencies": {
+		"@types/xml2js": "^0.4.9"
+	}
 }

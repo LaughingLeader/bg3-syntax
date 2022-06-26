@@ -11,7 +11,7 @@ import {
 
 export function formatError(message: string, err: any): string {
 	if (err instanceof Error) {
-		let error = <Error>err;
+		const error = <Error>err;
 		return `${message}: ${error.message}\n${error.stack}`;
 	} else if (typeof err === "string") {
 		return `${message}: ${err}`;
@@ -37,7 +37,7 @@ export default function runSafe<T, E>(
 				resolve(cancelValue());
 			} else {
 				try {
-					let result = func();
+					const result = func();
 					if (token.isCancellationRequested) {
 						resolve(cancelValue());
 						return;

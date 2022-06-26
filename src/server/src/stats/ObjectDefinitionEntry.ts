@@ -12,8 +12,10 @@ export default class ObjectDefinitionEntry extends BaseCompletionEntry {
 	export_type:string
 	can_inherit:boolean
 
-	constructor(xmlData:object) {
+	constructor(xmlData) {
 		super(xmlData);
+
+		this.can_inherit = true;
 		
 		if(this.name != "") {
 			this.category = this.safeAssign("category", this.attributes, this.name);
@@ -25,11 +27,11 @@ export default class ObjectDefinitionEntry extends BaseCompletionEntry {
 
 		this.fields = new Map();
 
-		let fieldsContainer = xmlData["field_definitions"][0]["field_definition"];
+		const fieldsContainer = xmlData["field_definitions"][0]["field_definition"];
 		//console.log(`Fields: ${JSON.stringify(fieldsContainer[0]["field_definition"], null, 2)}`);
 		if(fieldsContainer !== undefined) { 
 			fieldsContainer.forEach(field => {
-				let fieldEntry:FieldDefinitionEntry = new FieldDefinitionEntry(field);
+				const fieldEntry:FieldDefinitionEntry = new FieldDefinitionEntry(field);
 
 				//Using is a special declaration instead of 'data "Property"
 				if(fieldEntry.name !== "Using") {
@@ -37,7 +39,7 @@ export default class ObjectDefinitionEntry extends BaseCompletionEntry {
 					//console.log(`Added field entry: ${fieldEntry.name} | ${JSON.stringify(fieldEntry, null, 2)}`);
 				}
 				else {
-					this.can_inherit = true
+					this.can_inherit = true;
 				}
 			});
 		}

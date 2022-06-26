@@ -19,22 +19,22 @@ export class EnumValues extends BaseCompletionEntry implements IEnumValues {
 	constructor(xmlData:object) {
 		super(xmlData);
 		
-		this.completionValues = new Array();
-		this.values = new Array();
+		this.completionValues = [];
+		this.values = [];
 
-		let items = xmlData["items"][0]["item"];
+		const items = xmlData["items"][0]["item"];
 		//console.log(`Enums: ${JSON.stringify(items, null, 2)}`);
 		if (Array.isArray(items)){
 			items.forEach(item => {
 				if (Array.isArray(item)) {
 					item.forEach((sub) => {
-						let enumEntry:EnumEntry = new EnumEntry(sub);
+						const enumEntry:EnumEntry = new EnumEntry(sub);
 						this.values.push(enumEntry);
 						this.completionValues.push(enumEntry.completion);
 					});
 				}
 				else {
-					let enumEntry:EnumEntry = new EnumEntry(item);
+					const enumEntry:EnumEntry = new EnumEntry(item);
 					this.values.push(enumEntry);
 					this.completionValues.push(enumEntry.completion);
 				}

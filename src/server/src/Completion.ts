@@ -19,8 +19,9 @@ import Server from "./Server";
 import DivinityStatsSettings from "./DivinityStatsSettings";
 
 import runSafeAsync from "./utils/runSafeAsync";
-const fs = require('fs'), xml2js = require('xml2js');
-const path = require('path');
+import * as fs from "fs";
+import * as xml2js from "xml2js";
+import * as path from "path";
 
 import ObjectDefinitionEntry from './stats/ObjectDefinitionEntry';
 import { IEnumValues, EnumValues } from './stats/EnumValues';
@@ -74,10 +75,10 @@ export default class Completion {
 			if(settings != null) {
 				await this.loadDefinitions(settings).then((d) => {
 					this.server.connection.console.log(`Getting entries from [root][stat_object_definitions]`);
-					let entries = d["root"]["stat_object_definitions"][0];
+					const entries = d["root"]["stat_object_definitions"][0];
 					entries["stat_object_definition"].forEach(entry => {
 						//server.connection.console.log(`Entry: ${JSON.stringify(entry.$, null, 2)}`);
-						let definitionEntry:ObjectDefinitionEntry = new ObjectDefinitionEntry(entry);
+						const definitionEntry:ObjectDefinitionEntry = new ObjectDefinitionEntry(entry);
 						if(definitionEntry.name.includes("Status_")) {
 							definitionEntry.name = definitionEntry.name.replace("Status_", "");
 						}
@@ -100,9 +101,9 @@ export default class Completion {
 				await this.loadEnumerations(settings).then((d) => {
 					this.server.connection.console.log(`Getting entries from [root][enumerations]`);
 					//this.server.connection.console.log(`Entry: ${JSON.stringify(d["root"]["enumerations"], null, 2)}`);
-					let entries = d["root"]["enumerations"][0];
+					const entries = d["root"]["enumerations"][0];
 					entries["enumeration"].forEach(entry => {
-						let enumEntry:EnumValues = new EnumValues(entry);
+						const enumEntry:EnumValues = new EnumValues(entry);
 		
 						this.enumerations.set(enumEntry.name, enumEntry);
 
@@ -121,22 +122,22 @@ export default class Completion {
 					this.enumSource = d;
 					this.server.connection.console.log(`[DivinityStats] Finished building Enumerations. (${this.enumerations.size})`);
 
-					let targetConditionOperators:CustomEnumValues = new CustomEnumValues();
-					let notop = CompletionItem.create("!");
+					const targetConditionOperators:CustomEnumValues = new CustomEnumValues();
+					const notop = CompletionItem.create("!");
 					notop.sortText = "-1";
 					notop.documentation = {
 						kind: "markdown",
 						value: "NOT operator."
 					};
 					targetConditionOperators.completionValues.push(notop);
-					let andop = CompletionItem.create("&");
+					const andop = CompletionItem.create("&");
 					andop.sortText = "-2";
 					andop.documentation = {
 						kind: "markdown",
 						value: "AND operator."
 					};
 					targetConditionOperators.completionValues.push(andop);
-					let orop = CompletionItem.create("|");
+					const orop = CompletionItem.create("|");
 					orop.sortText = "-3";
 					orop.documentation = {
 						kind: "markdown",
@@ -153,7 +154,7 @@ export default class Completion {
 	async loadDefinitions(settings:DivinityStatsSettings) : Promise<object|null>{
 		const { server } = this;
 		return new Promise(async (resolve, reject) => {
-			let statObjPath = settings.definitionFile;
+			const statObjPath = settings.definitionFile;
 			server.connection.console.log(`Loading Definitions file from '${statObjPath}'`);
 			await this.loadFile(statObjPath).then((defObject) => {
 				if(defObject != null) {
@@ -173,7 +174,7 @@ export default class Completion {
 	async loadEnumerations(settings:DivinityStatsSettings) : Promise<object|null>{
 		const { server } = this;
 		return new Promise(async (resolve, reject) => {
-			let statObjPath = settings.enumFile;
+			const statObjPath = settings.enumFile;
 			server.connection.console.log(`Loading Enumerations file from '${statObjPath}'`);
 			await this.loadFile(statObjPath).then((defObject) => {
 				if(defObject != null) {
@@ -193,30 +194,32 @@ export default class Completion {
 		return new Promise((resolve, reject) => {
 			fs.readFile(filePath, "utf8", (err, data) => {
 				if(err) return reject(err);
-				let parser = new xml2js.Parser();
+				const parser = new xml2js.Parser();
 				parser.parseString(data, (err2, result) => {
 					if(err2) return reject(err2);
 					resolve(result);
 				});
 			});
-		})
-	};
+		});
+	}
 
-	async handleCompletion(params: CompletionParams, token:CancellationToken) : Promise<CompletionItem[]>{
+	async handleCompletion(params: CompletionParams, token:CancellationToken) : Promise<CompletionItem[]|undefined>{
 		const { connection } = this;
 		let results: Array<CompletionItem> = [];
 
-		let settings = await this.server.getDocumentSettings(params.textDocument.uri);
+		const settings = await this.server.getDocumentSettings(params.textDocument.uri);
 
-		let doc = this.documents.get(params.textDocument.uri);
-		let lineText = doc.getText(Range.create(params.position.line, 0, params.position.line, Number.MAX_VALUE));
-		let text = lineText.substring(0, params.position.character);
-		
-		await this.dataCompletion.handleCompletion(settings, text, lineText, doc, params, token).then((dataresults) => {
-			results = results.concat(dataresults);
-		})
-
-		return results;
+		const doc = this.documents.get(params.textDocument.uri);
+		if (doc) { 
+			const lineText = doc.getText(Range.create(params.position.line, 0, params.position.line, Number.MAX_VALUE));
+			const text = lineText.substring(0, params.position.character);
+			
+			await this.dataCompletion.handleCompletion(settings, text, lineText, doc, params, token).then((dataresults) => {
+				results = results.concat(dataresults);
+			});
+	
+			return results;
+		}
 	}
 
 	handleResolveCompletion(item: CompletionItem): CompletionItem {

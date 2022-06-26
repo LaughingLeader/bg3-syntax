@@ -3,6 +3,7 @@
 	"tslint.enable": true,
 	"typescript.tsc.autoDetect": "off",
 	"typescript.preferences.quoteStyle": "double",
+	"typescript.tsserver.experimental.enableProjectDiagnostics": true,
 	"workbench.colorCustomizations": {
 		"activityBar.background": "#163412",
 		"titleBar.activeBackground": "#1E491A",

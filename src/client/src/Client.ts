@@ -14,9 +14,9 @@ export default class Client extends EventEmitter {
 	clientId = "divinity-stats-language-server";
 	clientName = "Divinity Stats Language";
 	connection: LanguageClient | null;
-	connectCallbacks: Array<Function> = [];
+	connectCallbacks: Array<(client:LanguageClient) => void> = [];
 	context: ExtensionContext;
-	isReady: boolean = false;
+	isReady = false;
 	languages: Array<string> = ["divinitystats"];
 	outputChannel: OutputChannel;
 
@@ -35,7 +35,7 @@ export default class Client extends EventEmitter {
 	const { context, languages, outputChannel } = this;
 	const module = context.asAbsolutePath(join("bin", "server", "index.js"));
 
-	let serverOptions: ServerOptions = {
+	const serverOptions: ServerOptions = {
 		run: {
 		module,
 		transport: TransportKind.ipc
@@ -47,7 +47,7 @@ export default class Client extends EventEmitter {
 		}
 	};
 
-	let clientOptions: LanguageClientOptions = {
+	const clientOptions: LanguageClientOptions = {
 		documentSelector: [
 		...languages.map(language => ({
 			scheme: "file",
@@ -85,7 +85,7 @@ export default class Client extends EventEmitter {
 	dispose(): Thenable<void> {
 		const { connection } = this;
 		this.connection = null;
-		return;
+		return Promise.resolve();
 	}
 
 	async getConnection(): Promise<LanguageClient> {

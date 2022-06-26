@@ -15,10 +15,8 @@ import {
 	CancellationToken
 } 
 from "vscode-languageserver/node";
-
-import * as v from "voca";
-
-const path = require('path');
+//import * as voca from "voca";
+import * as path from "path";
 
 import Completion from "../Completion";
 import * as patterns from "./Patterns";
@@ -39,10 +37,10 @@ export default class DataCompletion {
 		let statType = "";
 
 		while(lineNum >= 0 && !stopSearching) {
-			let text = doc.getText(Range.create(lineNum, 0, lineNum, Number.MAX_VALUE));
+			const text = doc.getText(Range.create(lineNum, 0, lineNum, Number.MAX_VALUE));
 			//console.log(`[getStatType] Checking text: ${text} | ${lineNum}`);
 			if(text != "") {
-				let m = patterns.typePattern.exec(text);
+				const m = patterns.typePattern.exec(text);
 				if(m !== null) {
 					if (m.index === patterns.typePattern.lastIndex) {
 						patterns.typePattern.lastIndex++;
@@ -67,7 +65,7 @@ export default class DataCompletion {
 	{
 		let statType = "";
 
-		let m = patterns.typePattern.exec(entryText);
+		const m = patterns.typePattern.exec(entryText);
 		if(m !== null) {
 			statType = m[1];
 		}
@@ -118,8 +116,8 @@ export default class DataCompletion {
 		let entryType = "";
 
 		if(entryText != "") {
-			let findTypePattern = new RegExp(".*?data.*?" + typeStr + ".*?\"(\\w+).*?$", "gm");
-			let m = findTypePattern.exec(entryText);
+			const findTypePattern = new RegExp(".*?data.*?" + typeStr + ".*?\"(\\w+).*?$", "gm");
+			const m = findTypePattern.exec(entryText);
 			//console.log(`Searching text for ${typeStr} | ${findTypePattern.source} | ${entryText}`);
 			//console.log("Match: " + JSON.stringify(m, null, 2));
 			if(m != null) {
@@ -131,7 +129,7 @@ export default class DataCompletion {
 	}
 
 	getLineProperty(text:string):string {
-		let m = patterns.getPropertyPattern.exec(text);
+		const m = patterns.getPropertyPattern.exec(text);
 		if (m !== null) {
 			return m[1];
 		}
@@ -139,7 +137,7 @@ export default class DataCompletion {
 	}
 
 	isAtPropertyPosition(text:string) : boolean {
-		let m = patterns.propertyPositionPattern.exec(text);
+		const m = patterns.propertyPositionPattern.exec(text);
 		console.log(`Is at property position: ${text} => ${m}`);
 		if (m !== null && m.length > 0) {
 			return true;
@@ -148,7 +146,7 @@ export default class DataCompletion {
 	}
 
 	isAtValuePosition(text:string) : boolean {
-		let m = patterns.valuePositionPattern.exec(text);
+		const m = patterns.valuePositionPattern.exec(text);
 		console.log(`Is at value position: ${text} => ${m}`);
 		if (m !== null && m.length > 0) {
 			return true;
@@ -158,13 +156,13 @@ export default class DataCompletion {
 
 	canShowField(field:FieldDefinitionEntry, entryText:string, settings:DivinityStatsSettings) : boolean {
 		if(settings.limitToAvailableProperties == true) {
-			let properties = patterns.getAllPropertiesPattern.exec(entryText);
+			const properties = patterns.getAllPropertiesPattern.exec(entryText);
 		}
 		return true;
 	}
 
 	withinQuotes(text:string, params:CompletionParams) : boolean {
-		if(params.context.triggerCharacter === '"' || text.charAt(params.position.character - 1) == '"') {
+		if(params.context?.triggerCharacter === '"' || text.charAt(params.position.character - 1) == '"') {
 			return true;
 		} else {
 			let charNum = params.position.character;
@@ -198,15 +196,15 @@ export default class DataCompletion {
 
 		if(this.withinQuotes(lineText, params)) {
 			//Check for the first set of quotes
-			let entryText = this.getEntryText(doc, params);
+			const entryText = this.getEntryText(doc, params);
 			let statType = this.getStatType(entryText);
 
 			//Filename == category for special files like ItemCombos.
 			if(statType === "") {
-				let filename:string = path.parse(doc.uri).name;
-				let categoryEntries:Map<string,ObjectDefinitionEntry> = null;
+				const filename:string = path.parse(doc.uri).name;
+				//const categoryEntries:Map<string,ObjectDefinitionEntry> = null;
 
-				for(let [key, categoryMap] of definitions) {
+				for(const [key, categoryMap] of definitions) {
 					if(key.toLowerCase().indexOf(filename.toLowerCase()) > -1 ) {
 						statType = key;
 						break;
@@ -217,37 +215,38 @@ export default class DataCompletion {
 			connection.console.log(`Getting completion for stat type '${statType}'`);
 
 			if(statType != "") {
-				let categoryEntries = definitions.get(statType);
-				let definitionEntry:ObjectDefinitionEntry = null;
-
-				if(statType.indexOf("SkillData") > -1){
-					let skillType = this.getEntryType(entryText, "SkillType");
-					console.log("Getting definition for " + skillType);
-					if(skillType != "") {
-						definitionEntry = categoryEntries.get(skillType);
+				const categoryEntries = definitions.get(statType);
+				let definitionEntry:ObjectDefinitionEntry|undefined;
+				if (categoryEntries)
+				{
+					if(statType.indexOf("SkillData") > -1){
+						const skillType = this.getEntryType(entryText, "SkillType");
+						console.log("Getting definition for " + skillType);
+						if(skillType != "") {
+							definitionEntry = categoryEntries.get(skillType);
+						}
+					}
+					else if(statType.indexOf("StatusData") > -1) {
+						const statusType = this.getEntryType(entryText, "StatusType");
+						if(statusType != "") {
+							definitionEntry = categoryEntries.get(statusType);
+						}
+					}
+					else {
+						definitionEntry = categoryEntries.entries().next().value;
 					}
 				}
-				else if(statType.indexOf("StatusData") > -1) {
-					let statusType = this.getEntryType(entryText, "StatusType");
-					if(statusType != "") {
-						definitionEntry = categoryEntries.get(statusType);
-					}
-				}
-				else {
-					definitionEntry = categoryEntries[0];
-				}
 
-				if(definitionEntry != null) {
+				if(definitionEntry) {
 					connection.console.log(`Getting definitions for '${definitionEntry.name}'`);
 					if(this.isAtValuePosition(text)) {
-						let property = this.getLineProperty(text);
+						const property = this.getLineProperty(text);
 						if(property !== "") {
-							let field = definitionEntry.fields.get(property);
-							console.log(`Getting enums [${field.enumeration_type_name}] for property ${property}`);
-							if(field !== undefined){
-
+							const field = definitionEntry.fields.get(property);
+							if(field){
+								console.log(`Getting enums [${field.enumeration_type_name}] for property ${property}`);
 								if(field.enumeration_type_name != "") {
-									let enumEntry = this.parent.enumerations.get(field.enumeration_type_name);
+									const enumEntry = this.parent.enumerations.get(field.enumeration_type_name);
 									if(enumEntry !== undefined) {
 										//console.log(`Enums ${JSON.stringify(enumEntry.completionValues)}`);
 										result = result.concat(enumEntry.completionValues);
@@ -255,30 +254,37 @@ export default class DataCompletion {
 								}
 
 								if(field.export_name == "ExtraProperties" || field.export_name == "SkillProperties") {
-									let precedingText = text.substr(params.position.character - 7);
+									let precedingText = text.substring(params.position.character - 7);
 									if(precedingText.includes("TARGET") || precedingText.includes("SELF")) {
-										let ifCompletion = CompletionItem.create("IF");
+										const ifCompletion = CompletionItem.create("IF");
 										ifCompletion.data = "IF";
 										ifCompletion.kind = CompletionItemKind.Text;
 										ifCompletion.insertText = "(";
 										result.push(ifCompletion);
 									}
 									else {
-										precedingText = text.substr(params.position.character - 3);
+										precedingText = text.substring(params.position.character - 3);
 										if(precedingText == "IF(") {
-											result = result.concat(this.parent.enumerations.get("TargetConditionOperator").completionValues);
+											const targetConditionCompletion = this.parent.enumerations.get("TargetConditionOperator")?.completionValues;
+											if (targetConditionCompletion) {
+												result = result.concat(targetConditionCompletion);
+											}
 
-											let targetConditions = this.parent.enumerations.get("SkillTargetCondition").completionValues;
-											result = result.concat(targetConditions).filter((c, index, arr) => {
-												return c.data != "None";
-											});
+											const skillTargetCondition = this.parent.enumerations.get("SkillTargetCondition")?.completionValues;
+											if(skillTargetCondition) {
+												result = result.concat(skillTargetCondition).filter((c, index, arr) => {
+													return c.data != "None";
+												});
+											}
 										}
 										else {
-											let actions = this.parent.enumerations.get("Game Action").completionValues;
-											let surfaceActions = this.parent.enumerations.get("Surface Change").completionValues;
-											result = result.concat(actions, surfaceActions).filter((c, index, arr) => {
-												return c.data != "None";
-											});
+											const actions = this.parent.enumerations.get("Game Action")?.completionValues;
+											const surfaceActions = this.parent.enumerations.get("Surface Change")?.completionValues;
+											if(actions && surfaceActions) {
+												result = result.concat(actions, surfaceActions).filter((c, index, arr) => {
+													return c.data != "None";
+												});
+											}
 										}
 									}
 								}
@@ -287,11 +293,11 @@ export default class DataCompletion {
 					}
 					else if(this.isAtPropertyPosition(text)){
 
-						let ignoreFields:Array<string> = [];
+						const ignoreFields:Array<string> = [];
 
 						if(settings.limitToAvailableProperties == true) {
 							//console.log(`Searching entry text ${entryText} for properties`);
-							let m:RegExpExecArray;
+							let m:RegExpExecArray|null;
 							while ((m = patterns.getAllPropertiesPattern.exec(entryText)) !== null) {
 								// This is necessary to avoid infinite loops with zero-width matches
 								if (m.index === patterns.getAllPropertiesPattern.lastIndex) {

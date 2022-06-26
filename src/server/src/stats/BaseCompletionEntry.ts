@@ -13,7 +13,7 @@ export interface ICompletionEntry {
 }
 
 export default class BaseCompletionEntry implements ICompletionEntry{
-	completion:CompletionItem
+	completion:CompletionItem;
 	data:object
 	attributes:object
 
@@ -29,7 +29,7 @@ export default class BaseCompletionEntry implements ICompletionEntry{
 		this.description = this.safeAssign("description", this.attributes, "");
 	}
 
-	safeAssign(getProp:string, container:object, fallback) : any {
+	safeAssign(getProp:string, container:object, fallback:any) : any {
 		if(container !== undefined && getProp in container) { 
 			return container[getProp];
 		} else {
@@ -48,7 +48,7 @@ export default class BaseCompletionEntry implements ICompletionEntry{
 			this.documentation = {
 				kind: "markdown",
 				value: this.description
-			}
+			};
 		} else {
 			this.completion.documentation = this.documentation;
 		}

@@ -1,0 +1,93 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Divinity Behavior Script",
+	"scopeName": "source.divinityBehaviorScripting",
+	"patterns": [
+		{
+			"name": "string.quoted.double.divinityScript",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+			  {
+				"name": "constant.character.escape.divinityScript",
+				"match": "\\\\."
+			  }
+			]
+		},
+		{
+			"name": "constant.divinityScriptTypes",
+			"match": "\\b(STRING|FIXEDSTRING|INT|INT64|DAMAGE|FLOAT|CHARACTER|ITEM|CHARACTERTEMPLATE|LIST|STATUS|FLOAT3|TRIGGER|PEACE|COMBAT|ALL|SURFACE|null)\\b"
+		},
+		{
+			"name": "markup.bold.divinityScript",
+			"match": "^\\s*//(REGION|END_REGION).*"
+		},
+		{
+			"name": "comment.line.double-slash.divinityScript",
+			"match": "//.*"
+		},
+		{
+			"name": "comment.block.divinityScript",
+			"begin": "/\\*",
+			"end": "\\*/"
+		},
+		{
+			"name": "entity.name.type.divinityScriptDeclarations",
+			"match": "^(USING|#INCLUDE|INIT|EVENTS|STORY|BEHAVIOUR).*$"
+		},
+		{
+			"name": "support.type.divinityScript",
+			"match": "\\([A-Z]+[0-9]*\\)"
+		},
+		{
+			"name": "keyword.control.divinityScript",
+			"match": "\\b(IF|ELSE|ELSEIF|ELIF|THEN|ENDIF|CHECK)\\b"
+		},
+		{
+			"name": "entity.name.type.class.divinityScriptEventSection",
+			"match": "\\b(VARS|ON|ACTIONS)\\b"
+		},
+		{
+			"name": "divinityscript.eventblockstart",
+			"match": "^\\s*?(EVENT|REACTION|EXTERN|INTERRUPT)(.*?)$",
+			"captures": {
+				"1": {
+					"name": "entity.name.type.class.divinityScriptEventType"
+				},
+				"2": {
+					"name": "variable.language.divinityScriptEventName"
+				}
+			}
+		},
+		{
+			"name": "constant.numeric.divinityScript",
+			"match": "\\b([+-]?[0-9]*\\.[0-9]*)|([+-]?[0-9]+)\\b"
+		},
+		{
+			"name": "variable.parameter.divinityScriptGlobalVar",
+			"match": "%\\w+\\b"
+		},
+		{
+			"name": "variable.parameter.divinityScriptLocalVar",
+			"match": "\\b_\\w*?\\b"
+		},
+		{
+			"name": "entity.name.function.divinityScriptEvent",
+			"match": "\\b(OnFinishCalculationAi|FetchCharacterApplyStatusData|FetchItemApplyStatusData|FetchItemSkillOnDamage|FetchSkillScore|OItemFlagCleared|OnActivate|OnAttackOfOpportunity|OnAutomatedDialogEnded|OnAutomatedDialogStarted|OnBetterReactionFound|OnBlock|OnCharacterCharacterEvent|OnCharacterClassChanged|OnCharacterCreationStarted|OnCharacterCreationStopped|OnCharacterEvent|OnCharacterFlagCleared|OnCharacterFlagSet|OnCharacterFlagShared|OnCharacterItemEvent|OnCharacterMovedItem|OnCharacterOffStageChanged|OnCharacterPreMovedItem|OnCharacterStartAttackObject|OnCharacterStartAttackPosition|OnCharacterStatusApplied|OnCharacterStatusAttempt|OnCharacterStatusRemoved|OnCharacterTeleported|OnCharacterUsedSkillOnMe|OnCharacterUsedSourcePoint|OnCharacterVitalityChanged|OnClearAttackOfOpportunity|OnCombatRoundStarted|OnCombatStarted|OnCombatSwitched|OnCombatTick|OnCrimeAborted|OnCrimeAlarmed|OnCrimeInterrogationRequest|OnCrimeInvestigate|OnCrimeReturnToNormal|OnCrimeSensibleAction|OnCriticalHit|OnDamage|OnDeactivate|OnDialogEnded|OnDialogStarted|OnDie|OnEnemyChanged|OnException|OnFunction|OnGlobalFlagCleared|OnGlobalFlagSet|OnGrenadeLand|OnInit|OnItemClosed|OnItemDestroyed|OnItemDestroying|OnItemDropped|OnItemEquipped|OnItemEvent|OnItemFlagSet|OnItemFlagShared|OnItemOffStageChanged|OnItemOpened|OnItemStatus|OnItemStatusAttempt|OnItemStatusRemoved|OnItemUnequipped|OnItemUnlocked|OnItemVitalityChanged|OnIterateCharacter|OnIterateCount|OnIterateItem|OnLeftCombat|OnLoaded|OnLostSight|OnManualInterrupt|OnMiss|OnMovementFailed|OnNoReactionFound|OnPickupItem|OnPreBlock|OnReadyInCombat|OnRegionEntered|OnRegionLeft|OnRegionSwap|OnRuneInserted|OnRuneRemoved|OnScriptDisabled|OnShutdown|OnSight|OnSkillActivated|OnSkillAdded|OnSkillCast|OnSkillCombatComment|OnSkillDeactivated|OnSplineControlPointReached|OnStatusCreateVisuals|OnStatusDestroyVisuals|OnStoryOverride|OnTalentLocked|OnTalentUnlocked|OnTimer|OnTriggerEnter|OnTriggerLeave|OnTurn|OnTurnEnded|OnUseItem|OnVariableCleared)\\b"
+		},
+		{
+			"name": "entity.name.function.divinityScriptAction",
+			"match": "\\b(Abs|Add|AddStatusInfluence|AddTemporaryStatusInfluence|Assert|CallFunction|Cast|CharacterAddSkill|CharacterAddSourcePoints|CharacterAddToInventory|CharacterAddTreasureTable|CharacterAiCalculate|CharacterAiFinishMoveSkill|CharacterAiMove|CharacterAiRemoveInterestingItem|CharacterAiStopCalculate|CharacterAppearAt|CharacterAppearOnTrailOutOfSightTo|CharacterAppearOutOfSightTo|CharacterApplyStatus|CharacterAttack|CharacterAttackWithoutMove|CharacterCharacterEvent|CharacterClearTreasureTables|CharacterConsume|CharacterDestroy|CharacterDie|CharacterDisableAllCrimes|CharacterDisableCrime|CharacterDisappear|CharacterDrinkPotion|CharacterEnableAllCrimes|CharacterEvent|CharacterFleeFrom|CharacterFleeFromDangerousSurface|CharacterFollow|CharacterFollowOwnerOrLeader|CharacterHeal|CharacterInitPatrol|CharacterInterruptPatrol|CharacterItemEvent|CharacterLookAt|CharacterLookFrom|CharacterMoveInRange|CharacterMoveInSkillRange|CharacterMoveInWeaponRange|CharacterMoveItem|CharacterMoveOutOfSight|CharacterMoveTo|CharacterPickUpItem|CharacterPlayAnimation|CharacterPlayEffect|CharacterPlayLoopEffect|CharacterRemoveFromInventory|CharacterRemoveSkill|CharacterRemoveStatus|CharacterRemoveTreasureTable|CharacterResetCooldowns|CharacterResurrect|CharacterSetAnimationOverride|CharacterSetAnimationSetOverride|CharacterSetArchetype|CharacterSetAttackOfOpportunity|CharacterSetCanSpotSneakers|CharacterSetFightMode|CharacterSetFloating|CharacterSetHasDialog|CharacterSetImmortal|CharacterSetLongInvestigationDuration|CharacterSetOffStage|CharacterSetOnStage|CharacterSetRelationIndivToIndiv|CharacterSetRunSpeedOverride|CharacterSetStats|CharacterSetStoryNPC|CharacterSetTemporaryHostileRelation|CharacterSetWalkSpeedOverride|CharacterStartPatrol|CharacterStopAnimation|CharacterStopPatrol|CharacterSwitchWeaponType|CharacterUseActionPoints|CharacterUseItem|CharacterUseSkill|CharacterWander|Check|Clamp|ClearFlag|ClearGlobalFlag|ClearPartyFlag|ClearScriptFrame|ClearTag|ClearUserFlag|CombatLogText|ConfrontationDone|CreateConeSurfaceAt|CreatePuddleAt|CreateSurfaceAt|CreateSurfaceInAreaTrigger|CreateSurfaceInPolygon|CrimesceneInvestigationDone|DebugText|DelayReaction|DialogRequestStop|DialogStart|DisplayCombatInfoText|DisplayText|Divide|EndTurn|EnterCombat|ExplodeAt|FindPosition|FindSurface|FindValidPosition|GetAIHintTriggers|GetElement|GetRandom|GetRandomBetween|GetRandomPositionInTrigger|GetWeightedRandom|Give character some action points|GlobalClearEvent|GlobalSetEvent|Goto|GotoIfEqual|GotoRand|Interrupt|ItemAddCharges|ItemApplyStatus|ItemClose|ItemDestroy|ItemDie|ItemDrop|ItemEvent|ItemLock|ItemLookAt|ItemMoveTo|ItemOpen|ItemPlayAnimation|ItemPlayAnimationTo|ItemPlayEffect|ItemPlayLoopEffect|ItemRemoveStatus|ItemResetChargesToInitial|ItemSetAmount|ItemSetCanInteract|ItemSetOnStage|ItemToInventory|ItemUnlock|IterateCharacters|IterateCharactersNear|IterateCharactersOnObject|IterateHostilesFor|IterateItems|IterateItemsInInventory|IterateItemsNear|IterateItemsOnObject|IterateParty|JumpToTurn|KillCombat|Label|LeaveCombat|ListAdd|ListClear|ListRemove|ListSet|LoadGame|LoadLevel|Log|MakePeace|MakeWar|Multiply|Output|PlayEffectAt|PlayLoopEffectAt|PlayMusicForEveryone|PlayMusicForPeer|PlayMusicForPeerWithInstrument|PlayMusicOnCharacter|PlaySound|Print|RemoveStatusInfluence|Reset|ResetAtmosphere|ResetCombatTimeout|RotateY|SaveGame|Set|SetAtmosphere|SetCanFight|SetCanJoinCombat|SetCombatTimeout|SetFaction|SetFlag|SetGlobalFlag|SetHealth|SetInvulnerable|SetIsBoss|SetMaterial|SetPartyFlag|SetPriority|SetScriptFrame|SetTag|SetUserFlag|SetVar|SetVisible|SetX|SetY|SetZ|ShootLocalCone|ShootLocalConeAt|ShootLocalProjectile|ShootLocalProjectileAt|ShootWorldCone|ShootWorldConeAt|ShootWorldProjectile|ShootWorldProjectileAt|Sleep|SpawnCharacter|SpawnItem|StartTimer|StartVoiceBark|StatusText|StopLoopEffect|StopTimer|StringConcatenate|Subtract|TeleportTo|Transform| RETURN|ItemDrop|RemoveSurfaceLayerAt|SurfaceCreateLink|SurfaceRemoveLink|GetStatusTurns)\\b"
+		},
+		{
+			"name": "entity.name.function.divinityScriptCondition",
+			"match": "\\b(CanSee|CharacterAiFetchAttackCommand|CharacterAiFetchConsumeCommand|CharacterAiFetchFallbackCommand|CharacterAiFetchMoveSkillCommand|CharacterAiFetchSkillCommand|CharacterAiIsCalculating|CharacterAvoidsTraps|CharacterCanCast|CharacterCanDrinkPotion|CharacterCanFight|CharacterCanHitTargetWithRangedWeapon|CharacterCanMoveItem|CharacterCanSee|CharacterCanShoot|CharacterCanSitOnItem|CharacterCanSpotSneakers|CharacterCanUnlock|CharacterCanUseItem|CharacterCanUseItemInInventory|CharacterCheckRelation|CharacterCount|CharacterGet|CharacterGetAbility|CharacterGetArchetype|CharacterGetDeathType|CharacterGetEnemy|CharacterGetFollow|CharacterGetHostileCount|CharacterGetOwner|CharacterGetRace|CharacterGetReservedUserID|CharacterGetSightRange|CharacterGetSkillImpactRange|CharacterGetSkillRange|CharacterGetSourcePoints|CharacterGetStat|CharacterGetStatusSourceCharacter|CharacterGetStatusSourceItem|CharacterGetStillAnimation|CharacterGetTargetSpline|CharacterGetTemplate|CharacterGetTouchRange|CharacterGetWeaponRange|CharacterHasAnimationOverride|CharacterHasBeenHitBy|CharacterHasCastedSpellLastTurn|CharacterHasHadStatus|CharacterHasRangedWeapon|CharacterHasSkill|CharacterHasStatus|CharacterHasTalent|CharacterHasWeaponType|CharacterInCreation|CharacterInTouchRange|CharacterInWeaponRange|CharacterIsAlly|CharacterIsBetterOrEqualClass|CharacterIsDead|CharacterIsEnemy|CharacterIsFloating|CharacterIsInParty|CharacterIsInTrigger|CharacterIsMoving|CharacterIsNeutral|CharacterIsPartyFollower|CharacterIsPlayer|CharacterIsPolymorphedInto|CharacterIsPolymorphInteractionDisabled|CharacterIsRace|CharacterIsStoryNPC|CharacterIsSummon|CheckInteractionReach|ContainsSurface|CrimeGetCriminals|CrimeGetLeadInvestigator|CrimeGetType|CrimeTransferLeadership|DialogExists|GameIsLoading|GameIsSaving|GetAIBounds|GetClosestPlayer|GetCurrentCharacter|GetCurrentLevel|GetDirection|GetDistance|GetDistance2D|GetFaction|GetForwardDirection|GetInnerDistance|GetPlayerByIndex|GetPlayerCount|GetPosition|GetRandomCharacter|GetRightDirection|GetRotation|GetTextDuration|GetUpDirection|GetUserCount|GetVar|GetX|GetY|GetZ|HasFlag|HasGlobalFlag|HasPartyFlag|HasSkillAi|HasUserFlag|IsActive|IsBoss|IsCasual|IsEqual|IsFacing|IsGreaterThen|IsHardcore|IsInActiveTurn|IsInArena|IsInAutomatedDialog|IsInCombat|IsInCombatWith|IsInDangerousSurface|IsInDialog|IsInGameMasterMode|IsInSurface|IsLessThen|IsObjectOnObject|IsProjectileSkill|IsRandom|IsRound|IsSkillActive|IsSourceSkill|IsStoryItem|IsSurface|IsTagged|IsValidSkillTarget|IsVisible|ItemCanBeLockPicked|ItemCanBeMoved|ItemGet|ItemGetFromInventory|ItemGetItemType|ItemGetSkillId|ItemGetStat|ItemGetStatusSourceCharacter|ItemGetStatusSourceItem|ItemGetTemplate|ItemHasStatus|ItemIsClosing|ItemIsDestroyed|ItemIsFalling|ItemIsInCharacterInventory|ItemIsInTrigger|ItemIsLocked|ItemIsMovable|ItemIsMoving|ItemIsOpen|ItemIsOpening|ListGet|ListGetRandom|ListGetSize|TranslatedStringKeyExists|AttributeGetDifficultyLevelMappedValue|CharacterGetCreationClass|CharacterGetEquippedItem|CharacterInCreation|GetStatusTurn)\\b"
+		},
+		{
+			"name": "string.divinityScriptStatus",
+			"match": "\\b([A-Z0-9_]+)\\b"
+		}
+	]
+  }
+  
+  
