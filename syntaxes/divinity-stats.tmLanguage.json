@@ -243,8 +243,8 @@
 							}
 						},
 						{
-							"name": "keyword.control.divinitystats-treasuretable-objectcategory",
-							"match": "^(object category|CategoryMap|WeaponCounter|SkillbookCounter|ArmorCounter)\\s\"?([^\"]+)\"(,\")?([^\"]+)?\"?",
+							"name": "keyword.control.divinitystats-treasuregroups",
+							"match": "^(CategoryMap|WeaponCounter|SkillbookCounter|ArmorCounter)\\s\"?([^\"]+)\"(,\")?([^\"]+)?\"?",
 							"captures": {
 								"1": {
 									"name": "support.type.divinitystatstreasureparamtype"
@@ -253,7 +253,43 @@
 									"name": "entity.other.attribute-name.treasureparamvalue"
 								},
 								"4": {
-									"name": "entity.other.attribute-name.treasureparamvalue"
+									"name": "number.treasurecount"
+								}
+							}
+						},
+						{
+							"name": "keyword.control.divinitystats-treasuretable-objectcategory",
+							"match": "^(object category)\\s*\"([^\"]+)\"\\s*,\\s*(\\d)\\s*,\\s*(\\d)\\s*,\\s*(\\d)\\s*,\\s*(\\d)\\s*,\\s*(\\d)\\s*,\\s*(\\d)\\s*,\\s*(\\d)\\s*,(\\d)\\s*",
+							"captures": {
+								"1": {
+									"name": "support.type.divinitystatstreasureparamtype"
+								},
+								"2": {
+									"name": "string.objectcategoryvalue"
+								},
+								"3": {
+									"name": "number.treasure.frequency"
+								},
+								"4": {
+									"name": "number.treasure.rarity"
+								},
+								"5": {
+									"name": "number.treasure.rarity"
+								},
+								"6": {
+									"name": "number.treasure.rarity"
+								},
+								"7": {
+									"name": "number.treasure.rarity"
+								},
+								"8": {
+									"name": "number.treasure.rarity"
+								},
+								"9": {
+									"name": "number.treasure.rarity"
+								},
+								"10": {
+									"name": "number.treasure.rarity"
 								}
 							}
 						},
