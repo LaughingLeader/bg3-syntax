@@ -271,25 +271,25 @@
 									"name": "number.treasure.frequency"
 								},
 								"4": {
-									"name": "number.treasure.rarity"
+									"name": "number.treasure.rarity.common"
 								},
 								"5": {
-									"name": "number.treasure.rarity"
+									"name": "number.treasure.rarity.uncommon"
 								},
 								"6": {
-									"name": "number.treasure.rarity"
+									"name": "number.treasure.rarity.rare"
 								},
 								"7": {
-									"name": "number.treasure.rarity"
+									"name": "number.treasure.rarity.epic"
 								},
 								"8": {
-									"name": "number.treasure.rarity"
+									"name": "number.treasure.rarity.legendary"
 								},
 								"9": {
-									"name": "number.treasure.rarity"
+									"name": "number.treasure.rarity.divine"
 								},
 								"10": {
-									"name": "number.treasure.rarity"
+									"name": "number.treasure.rarity.unique"
 								}
 							}
 						},
