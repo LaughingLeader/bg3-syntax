@@ -4,7 +4,7 @@
 	"description": "Syntax highlighting for Divinity: Original Sin 2 - Definitive Edition stats / behavior scripting",
 	"author": "LaughingLeader",
 	"license": "MIT",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"icon": "images/vscode-divinitystats-icon.png",
 	"repository": {
 		"type": "git",
