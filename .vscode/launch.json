@@ -1,47 +1,13 @@
 {
 	"version": "0.2.0",
-	// List of configurations. Add new configurations or edit existing ones.
-	"configurations": [
-		{
+	"configurations": [{
+			"name": "Run Extension",
 			"type": "extensionHost",
 			"request": "launch",
-			"name": "Launch Client",
 			"runtimeExecutable": "${execPath}",
-			"args": ["--extensionDevelopmentPath=${workspaceRoot}" ],
-			"stopOnEntry": false,
-			"sourceMaps": true,
-			"outFiles": ["${workspaceRoot}/bin/client/*.js"],
-			"preLaunchTask": "npm: watch"
-		},
-		{
-			"type": "node",
-			"request": "attach",
-			"name": "Attach to Server 6010",
-			"address": "localhost",
-			"protocol": "inspector",
-			"port": 6010,
-			"sourceMaps": true,
-			"outFiles": ["${workspaceRoot}/bin/server/*.js"]
-		},
-		{
-			"type": "node",
-			"request": "attach",
-			"name": "Attach to Server 6011",
-			"address": "localhost",
-			"protocol": "inspector",
-			"port": 6011,
-			"sourceMaps": true,
-			"outFiles": ["${workspaceRoot}/bin/server/*.js"]
-		},
-		{
-			"type": "node",
-			"request": "attach",
-			"name": "Attach to Server 6012",
-			"address": "localhost",
-			"protocol": "inspector",
-			"port": 6012,
-			"sourceMaps": true,
-			"outFiles": ["${workspaceRoot}/bin/server/*.js"]
+			"args": [
+				"--extensionDevelopmentPath=${workspaceFolder}"
+			]
 		}
 	]
 }

@@ -1,7 +1,0 @@
-bin
-node_modules
-.prettierrc
-.editorconfig
-src/client/out
-src/server/out
-*.tsbuildinfo

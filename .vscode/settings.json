@@ -1,15 +1,3 @@
 {
-	"editor.insertSpaces": false,
-	"tslint.enable": true,
-	"typescript.tsc.autoDetect": "off",
-	"typescript.preferences.quoteStyle": "double",
-	"typescript.tsserver.experimental.enableProjectDiagnostics": true,
-	"workbench.colorCustomizations": {
-		"activityBar.background": "#163412",
-		"titleBar.activeBackground": "#1E491A",
-		"titleBar.activeForeground": "#F6FCF5"
-	},
-	"files.exclude": {
-		"**/node_modules/**" : true,
-	}
+	"editor.insertSpaces": false
 }
