@@ -259,7 +259,7 @@
 						},
 						{
 							"name": "keyword.control.divinitystats-treasuretable-objectcategory",
-							"match": "^(object category)\\s*\"([^\"]+)\"\\s*,\\s*(\\d)\\s*,\\s*(\\d)\\s*,\\s*(\\d)\\s*,\\s*(\\d)\\s*,\\s*(\\d)\\s*,\\s*(\\d)\\s*,\\s*(\\d)\\s*,(\\d)\\s*",
+							"match": "^(object category)\\s*\"([^\"]+)\"\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)\\s*,(\\d+)\\s*",
 							"captures": {
 								"1": {
 									"name": "support.type.divinitystatstreasureparamtype"
