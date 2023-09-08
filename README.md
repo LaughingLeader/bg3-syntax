@@ -1,11 +1,11 @@
-# Divinity Syntax VSCode Extension
+# BG3 Syntax VSCode Extension
 
-This is a [Visual Studio Code](https://code.visualstudio.com/) extension that adds syntax highlighting support for Divinity: Original Sin 2 - Definitive Edition stats files (.txt) and behavior scripting files (.charScript, .itemScript, .gameScript).
+This is a [Visual Studio Code](https://code.visualstudio.com/) extension that adds syntax highlighting support for Baldur's Gate 3 stats files (.txt) and behavior scripting files (.charScript, .itemScript, .gameScript).
 
 ## Installing
 
 Grab the latest release here:  
-[Latest Release](https://github.com/LaughingLeader-DOS2-Mods/divinity-syntax/releases/latest/download/divinity-syntax.vsix)
+[Latest Release](https://github.com/LaughingLeader/bg3-syntax/releases/latest/download/bg3-syntax.vsix)
 
 Install the extension from within VSCode:  
 

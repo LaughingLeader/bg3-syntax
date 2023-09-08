@@ -1,21 +1,21 @@
 {
-	"name": "divinity-syntax",
-	"displayName": "Divinity Syntax",
-	"description": "Syntax highlighting for Divinity: Original Sin 2 - Definitive Edition stats / behavior scripting",
+	"name": "bg3-syntax",
+	"displayName": "BG3 Syntax",
+	"description": "Syntax highlighting for Baldur's Gate 3 stats / behavior scripting",
 	"author": "LaughingLeader",
 	"license": "MIT",
 	"version": "1.0.1",
-	"icon": "images/vscode-divinitystats-icon.png",
+	"icon": "images/vscode-bg3-syntax-icon.png",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/LaughingLeader-DOS2-Mods/divinity-stats-languageserver"
+		"url": "https://github.com/LaughingLeader/bg3-syntax"
 	},
 	"publisher": "Languages",
 	"categories": [],
 	"keywords": [
-		"Larian",
-		"Divinity Engine",
-		"Stats"
+		"Baldur's Gate 3",
+		"Stats",
+		"Behavior Scripting"
 	],
 	"engines": {
 		"vscode": "^1.43.0"
@@ -23,37 +23,38 @@
 	"contributes": {
 		"languages": [
 			{
-				"id": "divinity-stats",
+				"id": "bg3-stats",
 				"aliases": [
-					"Divinity Stats",
-					"divinity-stats"
+					"BG3 Stats",
+					"bg3-stats"
 				],
 				"filenamePatterns": [
 					"**/Stats/Generated/*.txt",
 					"**/Stats/Generated/Data/*.txt"
 				],
-				"configuration": "./syntaxes/divinity-stats.language-configuration.json"
+				"extensions": [".txt"],
+				"configuration": "./syntaxes/bg3-stats.language-configuration.json"
 			},
 			{
-				"id": "divinity-behavior-scripting",
+				"id": "bg3-behavior-scripting",
 				"aliases": [
 					"Behavior Scripting",
-					"divinity-behavior-scripting"
+					"bg3-behavior-scripting"
 				],
 				"extensions": [".charscript", ".itemScript", ".gameScript"],
-				"configuration": "./syntaxes/divinity-behavior-scripting.language-configuration.json"
+				"configuration": "./syntaxes/bg3-behavior-scripting.language-configuration.json"
 			}
 		],
 		"grammars": [
 			{
-				"language": "divinity-stats",
-				"scopeName": "text.divinity.stats",
-				"path": "./syntaxes/divinity-stats.tmLanguage.json"
+				"language": "bg3-stats",
+				"scopeName": "text.bg3.stats",
+				"path": "./syntaxes/bg3-stats.tmLanguage.json"
 			},
 			{
-                "language": "divinity-behavior-scripting",
-                "scopeName": "source.divinityBehaviorScripting",
-                "path": "./syntaxes/divinity-behavior-scripting.tmLanguage.json"
+                "language": "bg3-behavior-scripting",
+                "scopeName": "source.bg3BehaviorScripting",
+                "path": "./syntaxes/bg3-behavior-scripting.tmLanguage.json"
             }
 		]
 	}
